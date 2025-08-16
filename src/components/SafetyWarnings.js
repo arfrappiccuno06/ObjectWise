@@ -43,7 +43,7 @@ const SafetyWarnings = ({ object }) => {
                     {object.criticalWarnings.map((warning, index) => (
                         <div key={index} className="warning-card critical">
                             <div className="warning-header">
-                                <span className="warning-icon">WARN</span>
+                                <span className="warning-icon">⚠️</span>
                                 <h4>{warning.title}</h4>
                             </div>
                             <div className="warning-content">
@@ -84,7 +84,7 @@ const SafetyWarnings = ({ object }) => {
                     {object.generalWarnings.map((warning, index) => (
                         <div key={index} className="warning-card general">
                             <div className="warning-header">
-                                <span className="warning-icon">WARN</span>
+                                <span className="warning-icon">⚠️</span>
                                 <h4>{warning.title || 'Safety Notice'}</h4>
                             </div>
                             <div className="warning-content">

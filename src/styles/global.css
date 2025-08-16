@@ -361,6 +361,7 @@ body {
     border-radius: 16px;
     margin-bottom: 20px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    position: relative;
 }
 
 .back-btn {
@@ -377,6 +378,8 @@ body {
     display: flex;
     gap: 20px;
     align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .object-image-container {
@@ -384,42 +387,40 @@ body {
     flex-shrink: 0;
 }
 
+.object-meta {
+    flex: 1;
+    min-width: 0;
+    padding-right: 20px;
+}
+
 .object-image {
     width: 120px;
     height: 120px;
     object-fit: cover;
     border-radius: 12px;
-    background: #f3f4f6;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid #374151;
 }
 
 .confidence-badge {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: 8px;
+    right: 8px;
     background: #10b981;
     color: white;
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
+    z-index: 10;
 }
 
-.dynamic-badge {
-    position: absolute;
-    bottom: -8px;
-    right: -8px;
-    background: #8b5cf6;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 10px;
-    font-weight: 600;
-}
 
 .object-meta h1 {
     font-size: 24px;
     margin-bottom: 8px;
     color: #f1f5f9;
+    word-break: break-word;
 }
 
 .object-category {
@@ -537,14 +538,14 @@ body {
 }
 
 .section-header.critical {
-    background: #fef2f2;
+    background: rgba(15, 15, 35, 0.8);
     border: 2px solid #ef4444;
     border-radius: 12px;
     padding: 16px;
 }
 
 .section-header.critical h3 {
-    color: #dc2626;
+    color: #ef4444;
 }
 
 .warning-card {
@@ -552,16 +553,17 @@ body {
     border-radius: 12px;
     padding: 16px;
     margin-bottom: 16px;
+    color: #e0e6ed;
 }
 
 .warning-card.critical {
     border-color: #ef4444;
-    background: #fef2f2;
+    background: rgba(15, 15, 35, 0.8);
 }
 
 .warning-card.general {
     border-color: #f59e0b;
-    background: #fffbeb;
+    background: rgba(15, 15, 35, 0.8);
 }
 
 .warning-header {
@@ -598,12 +600,14 @@ body {
 }
 
 .equipment-card {
-    border: 1px solid #e5e7eb;
+    border: 1px solid #374151;
     border-radius: 12px;
     padding: 16px;
     display: flex;
     gap: 12px;
     align-items: center;
+    background: rgba(15, 15, 35, 0.8);
+    color: #e0e6ed;
 }
 
 .equipment-icon {
@@ -637,13 +641,15 @@ body {
     align-items: center;
     gap: 8px;
     padding: 8px 12px;
-    background: #f3f4f6;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid #374151;
     border-radius: 8px;
+    color: #e0e6ed;
 }
 
 .instruction-header {
     display: flex;
-    justify-content: between;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
@@ -654,17 +660,19 @@ body {
 }
 
 .toggle-btn {
-    background: #e5e7eb;
-    border: none;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid #374151;
     padding: 8px 12px;
     border-radius: 8px;
     font-size: 12px;
     cursor: pointer;
     transition: all 0.2s;
+    color: #e0e6ed;
 }
 
 .toggle-btn:hover {
-    background: #d1d5db;
+    background: rgba(15, 15, 35, 0.9);
+    border-color: #60a5fa;
 }
 
 .step-progress {
@@ -677,7 +685,8 @@ body {
 .progress-bar {
     flex: 1;
     height: 8px;
-    background: #e5e7eb;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid #374151;
     border-radius: 4px;
     margin-right: 16px;
     overflow: hidden;
@@ -690,10 +699,12 @@ body {
 }
 
 .current-step {
-    border: 1px solid #e5e7eb;
+    border: 1px solid #374151;
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 24px;
+    background: rgba(15, 15, 35, 0.8);
+    color: #e0e6ed;
 }
 
 .step-header {
@@ -737,11 +748,12 @@ body {
 }
 
 .step-tips {
-    background: #f0f9ff;
+    background: rgba(15, 15, 35, 0.8);
     border: 1px solid #0ea5e9;
     border-radius: 8px;
     padding: 12px;
     margin-top: 16px;
+    color: #e0e6ed;
 }
 
 .step-navigation {
@@ -783,12 +795,13 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 2px solid #d1d5db;
-    background: white;
+    border: 2px solid #374151;
+    background: rgba(15, 15, 35, 0.8);
     cursor: pointer;
     font-size: 12px;
     font-weight: 600;
     transition: all 0.2s;
+    color: #e0e6ed;
 }
 
 .step-indicator.active {
@@ -805,10 +818,12 @@ body {
 
 /* All Steps View */
 .all-steps-view .step-card {
-    border: 1px solid #e5e7eb;
+    border: 1px solid #374151;
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
+    background: rgba(15, 15, 35, 0.8);
+    color: #e0e6ed;
 }
 
 .step-number {
@@ -855,13 +870,15 @@ body {
 }
 
 .add-tip-form {
-    background: white;
+    background: rgba(15, 15, 35, 0.95);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 16px;
     padding: 24px;
     max-width: 500px;
     width: 100%;
     max-height: 80vh;
     overflow-y: auto;
+    color: #e0e6ed;
 }
 
 .form-header {
@@ -972,11 +989,12 @@ body {
 }
 
 .tip-card {
-    border: 1px solid #e5e7eb;
+    border: 1px solid #374151;
     border-radius: 12px;
     padding: 16px;
     margin-bottom: 16px;
-    background: white;
+    background: rgba(15, 15, 35, 0.8);
+    color: #e0e6ed;
 }
 
 .tip-header {
@@ -1021,7 +1039,7 @@ body {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #1f2937;
+    color: #f1f5f9;
 }
 
 .tip-text {
@@ -1147,10 +1165,11 @@ body {
 .search-input-container {
     position: relative;
     display: flex;
-    background: white;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
 .search-input {
@@ -1159,6 +1178,8 @@ body {
     border: none;
     font-size: 16px;
     outline: none;
+    background: transparent;
+    color: #e0e6ed;
 }
 
 .clear-btn,
@@ -1233,13 +1254,13 @@ body {
 
 .result-card,
 .recent-object-card {
-    border: 1px solid #e5e7eb;
+    border: 1px solid #374151;
     border-radius: 12px;
     padding: 16px;
     text-decoration: none;
-    color: inherit;
+    color: #e0e6ed;
     transition: all 0.2s;
-    background: white;
+    background: rgba(15, 15, 35, 0.8);
 }
 
 .result-card:hover,
@@ -1276,6 +1297,7 @@ body {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 4px;
+    color: #f1f5f9;
 }
 
 .result-category {
@@ -1298,11 +1320,12 @@ body {
 
 .difficulty-badge,
 .time-badge {
-    background: #f3f4f6;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid #374151;
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 11px;
-    color: #6b7280;
+    color: #e0e6ed;
 }
 
 /* Recent searches */
@@ -1313,17 +1336,19 @@ body {
 }
 
 .recent-search-btn {
-    background: #f3f4f6;
-    border: 1px solid #d1d5db;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid #374151;
     padding: 6px 12px;
     border-radius: 16px;
     cursor: pointer;
     font-size: 14px;
     transition: all 0.2s;
+    color: #e0e6ed;
 }
 
 .recent-search-btn:hover {
-    background: #e5e7eb;
+    background: rgba(15, 15, 35, 0.9);
+    border-color: #60a5fa;
 }
 
 /* No results */
@@ -1456,10 +1481,11 @@ body {
 }
 
 .tip-feed-card {
-    border: 1px solid #e5e7eb;
+    border: 1px solid #374151;
     border-radius: 12px;
     padding: 16px;
-    background: white;
+    background: rgba(15, 15, 35, 0.8);
+    color: #e0e6ed;
 }
 
 .featured-grid {
@@ -1473,7 +1499,8 @@ body {
     border: 1px solid #fbbf24;
     border-radius: 12px;
     padding: 20px;
-    background: #fffbeb;
+    background: rgba(15, 15, 35, 0.8);
+    color: #e0e6ed;
 }
 
 .featured-badge {
@@ -1499,9 +1526,10 @@ body {
     align-items: center;
     gap: 16px;
     padding: 16px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #374151;
     border-radius: 12px;
-    background: white;
+    background: rgba(15, 15, 35, 0.8);
+    color: #e0e6ed;
 }
 
 .contributor-rank {
@@ -1553,8 +1581,10 @@ body {
 .stat-item {
     text-align: center;
     padding: 16px;
-    background: #f9fafb;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid #374151;
     border-radius: 8px;
+    color: #e0e6ed;
 }
 
 .stat-value {

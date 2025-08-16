@@ -44,6 +44,10 @@ const ObjectDetails = () => {
                     ← Back
                 </button>
                 
+                <div className="confidence-badge">
+                    {confidence}% match
+                </div>
+                
                 <div className="object-info">
                     <div className="object-image-container">
                         <img 
@@ -51,18 +55,12 @@ const ObjectDetails = () => {
                             alt={currentObject.name}
                             className="object-image"
                         />
-                        <div className="confidence-badge">
-                            {confidence}% match
-                        </div>
                     </div>
                     
                     <div className="object-meta">
                         <h1 className="object-name">{currentObject.name}</h1>
                         <span className="object-category">{currentObject.category}</span>
                         <div className="difficulty-indicator">
-                            <span className={`difficulty ${currentObject.difficulty?.toLowerCase()}`}>
-                                {currentObject.difficulty} Level
-                            </span>
                             <span className="time-estimate">
                                 Time: {currentObject.timeEstimate || '5-10 min'}
                             </span>

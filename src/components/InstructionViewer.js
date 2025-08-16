@@ -79,7 +79,7 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
                     <div className="tools-grid">
                         {object.requiredTools.map((tool, index) => (
                             <div key={index} className="tool-item">
-                                <span className="tool-icon">TOOL</span>
+                                <span className="tool-icon">🔧</span>
                                 <span className="tool-name">{tool}</span>
                             </div>
                         ))}
@@ -93,7 +93,7 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
                     <div className="materials-list">
                         {object.materials.map((material, index) => (
                             <div key={index} className="material-item">
-                                <span className="material-icon">MAT</span>
+                                <span className="material-icon">📦</span>
                                 <span className="material-name">{material}</span>
                             </div>
                         ))}
