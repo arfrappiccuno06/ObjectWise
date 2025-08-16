@@ -54,6 +54,11 @@ const ObjectDetails = () => {
                         <div className="confidence-badge">
                             {confidence}% match
                         </div>
+                        {currentObject.source === 'Google Vision API' && (
+                            <div className="dynamic-badge">
+                                🤖 AI Generated
+                            </div>
+                        )}
                     </div>
                     
                     <div className="object-meta">

@@ -70,6 +70,7 @@ const CameraCapture = () => {
 
     const analyzeImage = async () => {
         if (capturedImage) {
+            console.log('Starting object analysis...');
             await identifyObject(capturedImage);
         }
     };

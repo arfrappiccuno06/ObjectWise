@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { objectDatabase } from '../data/objectDatabase';
+import { generateInstructionsForObject } from '../data/visionToInstructions';
 import { cacheService } from './cacheService';
 
 const ObjectContext = createContext();
@@ -130,53 +131,125 @@ export const ObjectProvider = ({ children }) => {
             const labels = result.responses[0].labelAnnotations || [];
             const objects = result.responses[0].localizedObjectAnnotations || [];
             
-            // Match detected labels/objects to our database
-            return matchToDatabase([...labels, ...objects]);
+            console.log('Google Vision API detected:', labels.map(l => ({
+                label: l.description,
+                confidence: l.score
+            })));
+            
+            // First try to match against our curated database
+            const databaseMatch = matchToDatabase([...labels, ...objects]);
+            if (databaseMatch && databaseMatch.confidence > 70) {
+                console.log('Found high-confidence match in curated database');
+                return databaseMatch;
+            }
+            
+            // If no good database match, generate dynamic instructions
+            const bestDetection = labels[0]; // Google returns sorted by confidence
+            if (bestDetection && bestDetection.score > 0.5) {
+                console.log('Generating dynamic instructions for:', bestDetection.description);
+                const dynamicObject = generateInstructionsForObject(bestDetection);
+                return {
+                    object: dynamicObject,
+                    confidence: Math.round(bestDetection.score * 100),
+                    source: 'dynamic'
+                };
+            }
         }
         
         return null;
     };
 
     const matchToDatabase = (detections) => {
+        console.log('Google Vision API detected:', detections.map(d => ({
+            label: d.description || d.name,
+            confidence: d.score
+        })));
+
         let bestMatch = null;
         let highestScore = 0;
+        const minConfidenceThreshold = 0.3; // Minimum confidence to consider
 
         detections.forEach(detection => {
-            const label = detection.description || detection.name;
+            const label = (detection.description || detection.name || '').toLowerCase();
             const confidence = detection.score || 0;
+
+            // Skip low confidence detections
+            if (confidence < minConfidenceThreshold) return;
 
             objectDatabase.forEach(obj => {
                 let matchScore = 0;
+                const objName = obj.name.toLowerCase();
+                const objTags = obj.tags.map(tag => tag.toLowerCase());
+                const objCategory = obj.category.toLowerCase();
 
-                // Check name match
-                if (obj.name.toLowerCase().includes(label.toLowerCase()) ||
-                    label.toLowerCase().includes(obj.name.toLowerCase())) {
-                    matchScore += 0.8 * confidence;
+                // Exact name match (highest priority)
+                if (objName === label || label === objName) {
+                    matchScore += 1.0 * confidence;
+                }
+                // Partial name match (medium-high priority)
+                else if (objName.includes(label) || label.includes(objName)) {
+                    // But exclude very short matches to avoid false positives
+                    if (label.length > 3 && objName.length > 3) {
+                        matchScore += 0.7 * confidence;
+                    }
                 }
 
-                // Check tags match
-                obj.tags.forEach(tag => {
-                    if (tag.toLowerCase().includes(label.toLowerCase()) ||
-                        label.toLowerCase().includes(tag.toLowerCase())) {
-                        matchScore += 0.6 * confidence;
+                // Exact tag match (high priority)
+                objTags.forEach(tag => {
+                    if (tag === label || label === tag) {
+                        matchScore += 0.9 * confidence;
+                    }
+                    // Partial tag match (medium priority)
+                    else if ((tag.includes(label) || label.includes(tag)) && 
+                             label.length > 3 && tag.length > 3) {
+                        matchScore += 0.5 * confidence;
                     }
                 });
 
-                // Check category match
-                if (obj.category.toLowerCase().includes(label.toLowerCase()) ||
-                    label.toLowerCase().includes(obj.category.toLowerCase())) {
-                    matchScore += 0.5 * confidence;
+                // Category match (lower priority)
+                if (objCategory.includes(label) || label.includes(objCategory)) {
+                    matchScore += 0.3 * confidence;
                 }
 
-                if (matchScore > highestScore) {
+                // Special keyword mapping for common mismatches
+                const keywordMappings = {
+                    'mobile phone': ['smartphone', 'phone', 'mobile'],
+                    'smartphone': ['mobile phone', 'phone', 'cell phone'],
+                    'coffee maker': ['coffee machine', 'drip coffee'],
+                    'drill': ['power drill', 'electric drill'],
+                    'knife': ['kitchen knife', 'chef knife'],
+                    'screwdriver': ['tool', 'hand tool']
+                };
+
+                Object.entries(keywordMappings).forEach(([key, synonyms]) => {
+                    if (synonyms.some(synonym => 
+                        label.includes(synonym) || synonym.includes(label)
+                    )) {
+                        if (objName.includes(key) || objTags.includes(key)) {
+                            matchScore += 0.6 * confidence;
+                        }
+                    }
+                });
+
+                if (matchScore > highestScore && matchScore > 0.2) {
                     highestScore = matchScore;
                     bestMatch = {
                         object: obj,
-                        confidence: Math.round(matchScore * 100)
+                        confidence: Math.min(Math.round(matchScore * 100), 95),
+                        detectedAs: label,
+                        matchScore: matchScore.toFixed(2)
                     };
                 }
             });
         });
+
+        console.log('Best match found:', bestMatch);
+        
+        // If no good match found, return null
+        if (!bestMatch || highestScore < 0.4) {
+            console.log('No confident match found, highest score:', highestScore);
+            return null;
+        }
 
         return bestMatch;
     };

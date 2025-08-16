@@ -316,7 +316,7 @@ export const objectDatabase = [
         id: 'smartphone-001',
         name: 'Smartphone',
         category: 'Electronics',
-        tags: ['phone', 'mobile', 'technology', 'communication'],
+        tags: ['phone', 'mobile', 'technology', 'communication', 'smartphone', 'cell phone', 'mobile phone', 'device'],
         description: 'Modern touchscreen smartphone for communication, internet access, and various applications.',
         difficulty: 'Beginner',
         timeEstimate: '15-30 min setup',
