@@ -28,10 +28,10 @@ const ObjectDetails = () => {
     }
 
     const tabs = [
-        { id: 'instructions', label: '📋 Instructions', icon: '📋' },
-        { id: 'safety', label: '⚠️ Safety', icon: '⚠️' },
-        { id: 'tips', label: '💡 Tips', icon: '💡' },
-        { id: 'info', label: 'ℹ️ Info', icon: 'ℹ️' }
+        { id: 'instructions', label: 'Instructions', icon: '📋' },
+        { id: 'safety', label: 'Safety', icon: '⚠️' },
+        { id: 'tips', label: 'Tips', icon: '💡' },
+        { id: 'info', label: 'Info', icon: 'ℹ️' }
     ];
 
     return (
@@ -54,11 +54,6 @@ const ObjectDetails = () => {
                         <div className="confidence-badge">
                             {confidence}% match
                         </div>
-                        {currentObject.source === 'Google Vision API' && (
-                            <div className="dynamic-badge">
-                                🤖 AI Generated
-                            </div>
-                        )}
                     </div>
                     
                     <div className="object-meta">
@@ -69,7 +64,7 @@ const ObjectDetails = () => {
                                 {currentObject.difficulty} Level
                             </span>
                             <span className="time-estimate">
-                                ⏱️ {currentObject.timeEstimate || '5-10 min'}
+                                Time: {currentObject.timeEstimate || '5-10 min'}
                             </span>
                         </div>
                     </div>
@@ -113,12 +108,12 @@ const ObjectDetails = () => {
                 {activeTab === 'info' && (
                     <div className="object-info-tab">
                         <div className="info-section">
-                            <h3>📖 About This Object</h3>
+                            <h3>About This Object</h3>
                             <p>{currentObject.description}</p>
                         </div>
 
                         <div className="info-section">
-                            <h3>🏷️ Details</h3>
+                            <h3>Details</h3>
                             <div className="detail-grid">
                                 <div className="detail-item">
                                     <span className="detail-label">Category:</span>
@@ -142,7 +137,7 @@ const ObjectDetails = () => {
                         </div>
 
                         <div className="info-section">
-                            <h3>🧹 Maintenance</h3>
+                            <h3>Maintenance</h3>
                             <ul>
                                 {currentObject.maintenance?.map((tip, index) => (
                                     <li key={index}>{tip}</li>
@@ -151,13 +146,13 @@ const ObjectDetails = () => {
                         </div>
 
                         <div className="info-section">
-                            <h3>📦 Storage</h3>
+                            <h3>Storage</h3>
                             <p>{currentObject.storage}</p>
                         </div>
 
                         {currentObject.lifespan && (
                             <div className="info-section">
-                                <h3>⏰ Expected Lifespan</h3>
+                                <h3>Expected Lifespan</h3>
                                 <p>{currentObject.lifespan}</p>
                             </div>
                         )}
@@ -170,7 +165,7 @@ const ObjectDetails = () => {
                     📤 Share
                 </button>
                 <button className="action-btn secondary">
-                    ❓ Report Error
+                    🚨 Report Error
                 </button>
                 <button className="action-btn primary">
                     💾 Save to Library

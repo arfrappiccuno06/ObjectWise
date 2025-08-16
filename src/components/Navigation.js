@@ -26,7 +26,7 @@ const Navigation = () => {
     ];
 
     return (
-        <nav className="bottom-navigation">
+        <nav className="top-navigation">
             {navItems.map(item => (
                 <Link
                     key={item.path}

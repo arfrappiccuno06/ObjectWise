@@ -29,7 +29,8 @@
     "webpack-cli": "^5.1.0",
     "webpack-dev-server": "^4.15.0",
     "workbox-webpack-plugin": "^7.0.0",
-    "gh-pages": "^6.0.0"
+    "gh-pages": "^6.0.0",
+    "dotenv": "^16.3.0"
   },
   "dependencies": {
     "react": "^18.2.0",

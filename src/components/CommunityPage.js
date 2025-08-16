@@ -69,14 +69,14 @@ const CommunityPage = () => {
     const tabs = [
         { id: 'tips', label: 'Latest Tips', icon: '💡' },
         { id: 'featured', label: 'Featured', icon: '⭐' },
-        { id: 'contributors', label: 'Top Contributors', icon: '🏆' },
+        { id: 'contributors', label: 'Top Contributors', icon: '👑' },
         { id: 'stats', label: 'Community Stats', icon: '📊' }
     ];
 
     return (
         <div className="community-page">
             <div className="community-header">
-                <h1>👥 Community Hub</h1>
+                <h1>Community Hub</h1>
                 <p>Connect, learn, and share knowledge with fellow ObjectWise users</p>
             </div>
 
@@ -104,7 +104,7 @@ const CommunityPage = () => {
                         </div>
                     </div>
                     <div className="highlight-card">
-                        <div className="highlight-icon">🏷️</div>
+                        <div className="highlight-icon">📂</div>
                         <div className="highlight-content">
                             <h3>{userStats.categories || 0}</h3>
                             <p>Categories</p>
@@ -140,7 +140,7 @@ const CommunityPage = () => {
                                 <h4>No tips yet!</h4>
                                 <p>Be the first to share your knowledge with the community.</p>
                                 <Link to="/" className="start-sharing-btn">
-                                    Start Sharing Tips
+                                    💡 Start Sharing Tips
                                 </Link>
                             </div>
                         ) : (
@@ -154,7 +154,7 @@ const CommunityPage = () => {
                                                     {new Date(tip.timestamp).toLocaleDateString()}
                                                 </span>
                                                 {tip.verified && (
-                                                    <span className="verified-badge">✅ Verified</span>
+                                                    <span className="verified-badge">Verified</span>
                                                 )}
                                             </div>
                                             <span className="tip-category">{tip.category}</span>
@@ -166,7 +166,7 @@ const CommunityPage = () => {
                                         </div>
                                         
                                         <div className="tip-engagement">
-                                            <span className="helpful-count">👍 {tip.helpful || 0}</span>
+                                            <span className="helpful-count">Helpful: {tip.helpful || 0}</span>
                                             <span className="not-helpful-count">👎 {tip.notHelpful || 0}</span>
                                         </div>
                                     </div>
@@ -179,14 +179,14 @@ const CommunityPage = () => {
                 {activeTab === 'featured' && (
                     <div className="featured-tips">
                         <div className="section-header">
-                            <h3>⭐ Featured Tips</h3>
+                            <h3>Featured Tips</h3>
                             <p>High-quality tips verified by experts or highly rated by the community</p>
                         </div>
                         
                         <div className="featured-grid">
                             {featuredTips.map(tip => (
                                 <div key={tip.id} className="featured-tip-card">
-                                    <div className="featured-badge">⭐ Featured</div>
+                                    <div className="featured-badge">Featured</div>
                                     <div className="tip-content">
                                         <h4>{tip.title}</h4>
                                         <p>{tip.content}</p>
@@ -194,8 +194,8 @@ const CommunityPage = () => {
                                     <div className="tip-footer">
                                         <span className="tip-author">👤 {tip.author}</span>
                                         <div className="tip-stats">
-                                            <span>👍 {tip.helpful || 0}</span>
-                                            {tip.verified && <span>✅ Verified</span>}
+                                            <span>Helpful: {tip.helpful || 0}</span>
+                                            {tip.verified && <span>Verified</span>}
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@ const CommunityPage = () => {
                 {activeTab === 'contributors' && (
                     <div className="top-contributors">
                         <div className="section-header">
-                            <h3>🏆 Top Contributors</h3>
+                            <h3>Top Contributors</h3>
                             <p>Recognizing our most helpful community members</p>
                         </div>
                         
@@ -224,10 +224,10 @@ const CommunityPage = () => {
                                     <div className="contributor-info">
                                         <h4>{contributor.name}</h4>
                                         <div className="contributor-stats">
-                                            <span>💡 {contributor.tipCount} tips</span>
-                                            <span>👍 {contributor.totalHelpful} helpful</span>
+                                            <span>Tips: {contributor.tipCount}</span>
+                                            <span>Helpful: {contributor.totalHelpful}</span>
                                             {contributor.verifiedTips > 0 && (
-                                                <span>✅ {contributor.verifiedTips} verified</span>
+                                                <span>Verified: {contributor.verifiedTips}</span>
                                             )}
                                         </div>
                                     </div>
@@ -244,7 +244,7 @@ const CommunityPage = () => {
                 {activeTab === 'stats' && (
                     <div className="community-stats">
                         <div className="section-header">
-                            <h3>📊 Community Statistics</h3>
+                            <h3>Community Statistics</h3>
                             <p>Insights into our growing community</p>
                         </div>
                         
@@ -300,21 +300,21 @@ const CommunityPage = () => {
             <div className="community-actions">
                 <div className="action-cards">
                     <div className="action-card">
-                        <h4>🎯 Share Your Expertise</h4>
+                        <h4>Share Your Expertise</h4>
                         <p>Help others by sharing tips and tricks you've learned</p>
-                        <Link to="/" className="action-btn">Start Contributing</Link>
+                        <Link to="/" className="action-btn">💡 Start Contributing</Link>
                     </div>
                     
                     <div className="action-card">
-                        <h4>🔍 Discover Objects</h4>
+                        <h4>Discover Objects</h4>
                         <p>Explore our growing database of objects and instructions</p>
-                        <Link to="/search" className="action-btn">Browse Database</Link>
+                        <Link to="/search" className="action-btn">📋 Browse Database</Link>
                     </div>
                     
                     <div className="action-card">
-                        <h4>📸 Identify Objects</h4>
+                        <h4>Identify Objects</h4>
                         <p>Use your camera to identify objects and get instructions</p>
-                        <Link to="/" className="action-btn">Use Camera</Link>
+                        <Link to="/" className="action-btn">📷 Use Camera</Link>
                     </div>
                 </div>
             </div>

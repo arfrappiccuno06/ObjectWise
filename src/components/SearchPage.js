@@ -86,7 +86,7 @@ const SearchPage = () => {
     return (
         <div className="search-page">
             <div className="search-header">
-                <h1>🔍 Search Objects</h1>
+                <h1>Search Objects</h1>
                 <p>Find instructions for any object in our database</p>
             </div>
 
@@ -105,11 +105,11 @@ const SearchPage = () => {
                             onClick={clearSearch}
                             className="clear-btn"
                         >
-                            ✖️
+                            X
                         </button>
                     )}
                     <button type="submit" className="search-btn">
-                        🔍
+                        🔍 SEARCH
                     </button>
                 </div>
             </form>
@@ -121,7 +121,7 @@ const SearchPage = () => {
                         className={`category-btn ${selectedCategory === 'all' ? 'active' : ''}`}
                         onClick={() => setSelectedCategory('all')}
                     >
-                        🌟 All
+                        All
                     </button>
                     {objectCategories.map(category => (
                         <button
@@ -163,11 +163,7 @@ const SearchPage = () => {
                                 className="recent-object-card"
                             >
                                 <div className="object-image-placeholder">
-                                    {obj.category === 'Kitchen Tools' && '🍳'}
-                                    {obj.category === 'Power Tools' && '🔧'}
-                                    {obj.category === 'Plants' && '🌱'}
-                                    {obj.category === 'Electronics' && '📱'}
-                                    {obj.category === 'Safety Equipment' && '🛡️'}
+                                    {obj.category.slice(0, 3).toUpperCase()}
                                 </div>
                                 <h4>{obj.name}</h4>
                                 <span className="object-category">{obj.category}</span>
@@ -179,7 +175,7 @@ const SearchPage = () => {
 
             {searchQuery && results.length === 0 && (
                 <div className="no-results">
-                    <div className="no-results-icon">🤷‍♀️</div>
+                    <div className="no-results-icon">?</div>
                     <h3>No results found</h3>
                     <p>Try searching with different keywords or check the spelling</p>
                     <div className="search-suggestions">
@@ -192,7 +188,7 @@ const SearchPage = () => {
                         </ul>
                     </div>
                     <button className="request-object-btn">
-                        📝 Request This Object
+                        📨 Request This Object
                     </button>
                 </div>
             )}
@@ -212,12 +208,7 @@ const SearchPage = () => {
                             >
                                 <div className="result-image">
                                     <div className="category-icon">
-                                        {obj.category === 'Kitchen Tools' && '🍳'}
-                                        {obj.category === 'Power Tools' && '🔧'}
-                                        {obj.category === 'Plants' && '🌱'}
-                                        {obj.category === 'Electronics' && '📱'}
-                                        {obj.category === 'Safety Equipment' && '🛡️'}
-                                        {!['Kitchen Tools', 'Power Tools', 'Plants', 'Electronics', 'Safety Equipment'].includes(obj.category) && '📦'}
+                                        {obj.category.slice(0, 3).toUpperCase()}
                                     </div>
                                     <div className="safety-indicator">
                                         <div 
@@ -234,7 +225,7 @@ const SearchPage = () => {
                                     
                                     <div className="result-meta">
                                         <span className="difficulty-badge">{obj.difficulty}</span>
-                                        <span className="time-badge">⏱️ {obj.timeEstimate}</span>
+                                        <span className="time-badge">Time: {obj.timeEstimate}</span>
                                     </div>
                                 </div>
                             </Link>
@@ -261,7 +252,7 @@ const SearchPage = () => {
                                     onClick={() => setSelectedCategory(category.name)}
                                     className="browse-category-btn"
                                 >
-                                    Browse →
+                                    📞 Browse →
                                 </button>
                             </div>
                         </div>

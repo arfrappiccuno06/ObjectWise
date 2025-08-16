@@ -1,6 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
+
+// Load environment variables
+require('dotenv').config();
 
 module.exports = {
   entry: './src/index.js',
@@ -36,6 +40,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       title: 'ObjectWise'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'REACT_APP_GOOGLE_VISION_API_KEY': JSON.stringify(process.env.REACT_APP_GOOGLE_VISION_API_KEY)
+      }
     }),
     new GenerateSW({
       clientsClaim: true,

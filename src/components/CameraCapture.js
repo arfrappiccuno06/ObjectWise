@@ -135,7 +135,7 @@ const CameraCapture = () => {
                         )}
                         {error && (
                             <div className="error-overlay">
-                                <div className="error-icon">❌</div>
+                                <div className="error-icon">X</div>
                                 <h4>Recognition Failed</h4>
                                 <p>{error}</p>
                                 <div className="error-actions">
@@ -186,13 +186,9 @@ const CameraCapture = () => {
                         </div>
                         
                         <div className="help-text">
-                            <div className="demo-banner">
-                                <h4>🚀 Demo Mode</h4>
-                                <p>For real object recognition, add Google Vision API key to .env file</p>
-                            </div>
-                            <p>📱 Point your camera at any object</p>
-                            <p>🎯 Center it in the frame for best results</p>
-                            <p>💡 Recognition works about 30% of the time in demo mode</p>
+                            <p>Point your camera at any object</p>
+                            <p>Center it in the frame for best results</p>
+                            <p>Use good lighting for accurate recognition</p>
                         </div>
                     </>
                 ) : (
@@ -217,7 +213,7 @@ const CameraCapture = () => {
             </div>
 
             <div className="quick-tips">
-                <h3>📋 Quick Tips</h3>
+                <h3>Quick Tips</h3>
                 <ul>
                     <li>Ensure good lighting for better recognition</li>
                     <li>Keep the object centered and in focus</li>

@@ -703,56 +703,56 @@ export const objectCategories = [
     {
         id: 'kitchen',
         name: 'Kitchen Tools',
-        icon: '🍳',
+        icon: 'KITCHEN',
         description: 'Cooking and food preparation equipment',
         objects: ['kitchen-knife-001']
     },
     {
         id: 'power-tools',
         name: 'Power Tools',
-        icon: '🔧',
+        icon: 'POWER',
         description: 'Electric and battery-powered tools',
         objects: ['drill-001']
     },
     {
         id: 'plants',
         name: 'Plants',
-        icon: '🌱',
+        icon: 'PLANT',
         description: 'Indoor and outdoor plants care',
         objects: ['plant-001']
     },
     {
         id: 'safety',
         name: 'Safety Equipment',
-        icon: '🛡️',
+        icon: 'SAFETY',
         description: 'Safety and emergency equipment',
         objects: ['fire-extinguisher-001', 'first-aid-kit-001']
     },
     {
         id: 'electronics',
         name: 'Electronics',
-        icon: '📱',
+        icon: 'TECH',
         description: 'Electronic devices and gadgets',
         objects: ['smartphone-001']
     },
     {
         id: 'hand-tools',
         name: 'Hand Tools',
-        icon: '🔨',
+        icon: 'HAND',
         description: 'Manual tools and hardware',
         objects: ['screwdriver-001']
     },
     {
         id: 'appliances',
         name: 'Appliances',
-        icon: '🏠',
+        icon: 'HOME',
         description: 'Household appliances and devices',
         objects: ['coffee-maker-001', 'washing-machine-001']
     },
     {
         id: 'sports',
         name: 'Sports Equipment',
-        icon: '⚽',
+        icon: 'SPORT',
         description: 'Athletic and recreational equipment',
         objects: ['bicycle-001']
     }

@@ -13,8 +13,8 @@ const SafetyWarnings = ({ object }) => {
         const levels = {
             low: { color: '#10B981', icon: '🟢', text: 'Low Risk' },
             medium: { color: '#F59E0B', icon: '🟡', text: 'Medium Risk' },
-            high: { color: '#EF4444', icon: '🔴', text: 'High Risk' },
-            critical: { color: '#DC2626', icon: '🚨', text: 'Critical Risk' }
+            high: { color: '#EF4444', icon: '🟠', text: 'High Risk' },
+            critical: { color: '#DC2626', icon: '🔴', text: 'Critical Risk' }
         };
         return levels[level] || levels.medium;
     };
@@ -36,14 +36,14 @@ const SafetyWarnings = ({ object }) => {
             {object.criticalWarnings && object.criticalWarnings.length > 0 && (
                 <div className="critical-warnings-section">
                     <div className="section-header critical">
-                        <h3>🚨 CRITICAL SAFETY WARNINGS</h3>
+                        <h3>CRITICAL SAFETY WARNINGS</h3>
                         <p>Read and acknowledge all warnings before proceeding</p>
                     </div>
                     
                     {object.criticalWarnings.map((warning, index) => (
                         <div key={index} className="warning-card critical">
                             <div className="warning-header">
-                                <span className="warning-icon">🚨</span>
+                                <span className="warning-icon">WARN</span>
                                 <h4>{warning.title}</h4>
                             </div>
                             <div className="warning-content">
@@ -78,13 +78,13 @@ const SafetyWarnings = ({ object }) => {
             {object.generalWarnings && object.generalWarnings.length > 0 && (
                 <div className="general-warnings-section">
                     <div className="section-header warning">
-                        <h3>⚠️ General Safety Warnings</h3>
+                        <h3>General Safety Warnings</h3>
                     </div>
                     
                     {object.generalWarnings.map((warning, index) => (
                         <div key={index} className="warning-card general">
                             <div className="warning-header">
-                                <span className="warning-icon">⚠️</span>
+                                <span className="warning-icon">WARN</span>
                                 <h4>{warning.title || 'Safety Notice'}</h4>
                             </div>
                             <div className="warning-content">
@@ -98,7 +98,7 @@ const SafetyWarnings = ({ object }) => {
             {object.ageRestrictions && (
                 <div className="age-restrictions-section">
                     <div className="section-header info">
-                        <h3>👶 Age Restrictions & Supervision</h3>
+                        <h3>Age Restrictions & Supervision</h3>
                     </div>
                     
                     <div className="restriction-card">
@@ -126,13 +126,13 @@ const SafetyWarnings = ({ object }) => {
             {object.requiredSafetyEquipment && object.requiredSafetyEquipment.length > 0 && (
                 <div className="safety-equipment-section">
                     <div className="section-header equipment">
-                        <h3>🥽 Required Safety Equipment</h3>
+                        <h3>Required Safety Equipment</h3>
                     </div>
                     
                     <div className="equipment-grid">
                         {object.requiredSafetyEquipment.map((equipment, index) => (
                             <div key={index} className="equipment-card">
-                                <div className="equipment-icon">🛡️</div>
+                                <div className="equipment-icon">EQUIP</div>
                                 <div className="equipment-info">
                                     <h4>{equipment.name}</h4>
                                     <p>{equipment.purpose}</p>
@@ -149,13 +149,13 @@ const SafetyWarnings = ({ object }) => {
             {object.commonMistakes && object.commonMistakes.length > 0 && (
                 <div className="common-mistakes-section">
                     <div className="section-header mistakes">
-                        <h3>❌ Common Mistakes to Avoid</h3>
+                        <h3>Common Mistakes to Avoid</h3>
                     </div>
                     
                     {object.commonMistakes.map((mistake, index) => (
                         <div key={index} className="mistake-card">
                             <div className="mistake-header">
-                                <span className="mistake-icon">❌</span>
+                                <span className="mistake-icon">X</span>
                                 <h4>{mistake.mistake}</h4>
                             </div>
                             <div className="mistake-content">
@@ -170,14 +170,14 @@ const SafetyWarnings = ({ object }) => {
             {object.emergencyProcedures && (
                 <div className="emergency-procedures-section">
                     <div className="section-header emergency">
-                        <h3>🚑 Emergency Procedures</h3>
+                        <h3>Emergency Procedures</h3>
                     </div>
                     
                     <div className="emergency-procedures">
                         {object.emergencyProcedures.map((procedure, index) => (
                             <div key={index} className="procedure-card">
                                 <div className="procedure-header">
-                                    <span className="procedure-icon">🚑</span>
+                                    <span className="procedure-icon">EMRG</span>
                                     <h4>{procedure.situation}</h4>
                                 </div>
                                 <div className="procedure-steps">
@@ -201,27 +201,27 @@ const SafetyWarnings = ({ object }) => {
             {object.environmentalConsiderations && (
                 <div className="environmental-section">
                     <div className="section-header environmental">
-                        <h3>🌍 Environmental & Legal Considerations</h3>
+                        <h3>Environmental & Legal Considerations</h3>
                     </div>
                     
                     <div className="environmental-considerations">
                         {object.environmentalConsiderations.indoor && (
                             <div className="environment-card">
-                                <h4>🏠 Indoor Use</h4>
+                                <h4>Indoor Use</h4>
                                 <p>{object.environmentalConsiderations.indoor}</p>
                             </div>
                         )}
                         
                         {object.environmentalConsiderations.outdoor && (
                             <div className="environment-card">
-                                <h4>🌳 Outdoor Use</h4>
+                                <h4>Outdoor Use</h4>
                                 <p>{object.environmentalConsiderations.outdoor}</p>
                             </div>
                         )}
                         
                         {object.environmentalConsiderations.legal && (
                             <div className="environment-card legal">
-                                <h4>⚖️ Legal Requirements</h4>
+                                <h4>Legal Requirements</h4>
                                 <p>{object.environmentalConsiderations.legal}</p>
                             </div>
                         )}
@@ -231,7 +231,7 @@ const SafetyWarnings = ({ object }) => {
 
             <div className="safety-footer">
                 <div className="safety-reminder">
-                    <h4>📞 Remember:</h4>
+                    <h4>Remember:</h4>
                     <ul>
                         <li>Always read all safety information before use</li>
                         <li>When in doubt, ask for help from an expert</li>
@@ -241,7 +241,7 @@ const SafetyWarnings = ({ object }) => {
                 </div>
                 
                 <div className="emergency-contacts">
-                    <h4>🚨 Emergency Numbers:</h4>
+                    <h4>Emergency Numbers:</h4>
                     <div className="contacts-grid">
                         <div className="contact-item">
                             <strong>Emergency:</strong> 911 (US) / 999 (UK) / 112 (EU)

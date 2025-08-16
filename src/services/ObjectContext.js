@@ -85,17 +85,25 @@ export const ObjectProvider = ({ children }) => {
     };
 
     const performObjectRecognition = async (imageData) => {
+        console.log('🚀 Starting object recognition...');
+        
         // Try real computer vision first
         try {
+            console.log('🔬 Attempting Google Vision API...');
             const realResult = await callComputerVisionAPI(imageData);
             if (realResult) {
+                console.log('✅ Google Vision API success:', realResult);
                 return realResult;
+            } else {
+                console.log('⚠️ Google Vision API returned no results');
             }
         } catch (error) {
-            console.log('Computer vision API unavailable, using intelligent matching');
+            console.error('❌ Google Vision API failed:', error.message);
+            console.log('🔄 Falling back to demo mode...');
         }
 
         // Fallback to intelligent pattern matching
+        console.log('🎮 Using demo mode recognition...');
         return await performIntelligentMatching(imageData);
     };
 
@@ -103,60 +111,82 @@ export const ObjectProvider = ({ children }) => {
         // Google Vision API integration
         const API_KEY = process.env.REACT_APP_GOOGLE_VISION_API_KEY;
         
+        console.log('🔍 API Key present:', !!API_KEY);
+        console.log('🔍 API Key first 10 chars:', API_KEY ? API_KEY.substring(0, 10) + '...' : 'UNDEFINED');
+        
         if (!API_KEY) {
+            console.log('❌ No API key found');
             throw new Error('API key not configured');
         }
 
-        const response = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                requests: [{
-                    image: {
-                        content: imageData.split(',')[1] // Remove data:image/jpeg;base64, prefix
-                    },
-                    features: [
-                        { type: 'LABEL_DETECTION', maxResults: 10 },
-                        { type: 'OBJECT_LOCALIZATION', maxResults: 10 }
-                    ]
-                }]
-            })
-        });
+        console.log('📤 Calling Google Vision API...');
+        
+        try {
+            const response = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    requests: [{
+                        image: {
+                            content: imageData.split(',')[1] // Remove data:image/jpeg;base64, prefix
+                        },
+                        features: [
+                            { type: 'LABEL_DETECTION', maxResults: 10 },
+                            { type: 'OBJECT_LOCALIZATION', maxResults: 10 }
+                        ]
+                    }]
+                })
+            });
 
-        const result = await response.json();
-        
-        if (result.responses && result.responses[0]) {
-            const labels = result.responses[0].labelAnnotations || [];
-            const objects = result.responses[0].localizedObjectAnnotations || [];
+            console.log('📥 API Response status:', response.status);
             
-            console.log('Google Vision API detected:', labels.map(l => ({
-                label: l.description,
-                confidence: l.score
-            })));
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ API Error:', errorText);
+                throw new Error(`API request failed: ${response.status} - ${errorText}`);
+            }
+
+            const result = await response.json();
+            console.log('📋 Full API Response:', result);
             
-            // First try to match against our curated database
-            const databaseMatch = matchToDatabase([...labels, ...objects]);
-            if (databaseMatch && databaseMatch.confidence > 70) {
-                console.log('Found high-confidence match in curated database');
-                return databaseMatch;
+            if (result.responses && result.responses[0]) {
+                const labels = result.responses[0].labelAnnotations || [];
+                const objects = result.responses[0].localizedObjectAnnotations || [];
+                
+                console.log('Google Vision API detected:', labels.map(l => ({
+                    label: l.description,
+                    confidence: l.score
+                })));
+                
+                // First try to match against our curated database
+                const databaseMatch = matchToDatabase([...labels, ...objects]);
+                if (databaseMatch && databaseMatch.confidence > 70) {
+                    console.log('Found high-confidence match in curated database');
+                    return databaseMatch;
+                }
+                
+                // If no good database match, generate dynamic instructions
+                const bestDetection = labels[0]; // Google returns sorted by confidence
+                if (bestDetection && bestDetection.score > 0.5) {
+                    console.log('Generating dynamic instructions for:', bestDetection.description);
+                    const dynamicObject = generateInstructionsForObject(bestDetection);
+                    return {
+                        object: dynamicObject,
+                        confidence: Math.round(bestDetection.score * 100),
+                        source: 'dynamic'
+                    };
+                }
             }
             
-            // If no good database match, generate dynamic instructions
-            const bestDetection = labels[0]; // Google returns sorted by confidence
-            if (bestDetection && bestDetection.score > 0.5) {
-                console.log('Generating dynamic instructions for:', bestDetection.description);
-                const dynamicObject = generateInstructionsForObject(bestDetection);
-                return {
-                    object: dynamicObject,
-                    confidence: Math.round(bestDetection.score * 100),
-                    source: 'dynamic'
-                };
-            }
+            console.log('❌ No valid detections found');
+            return null;
+            
+        } catch (error) {
+            console.error('❌ API call failed:', error);
+            throw error;
         }
-        
-        return null;
     };
 
     const matchToDatabase = (detections) => {

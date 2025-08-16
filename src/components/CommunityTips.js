@@ -88,18 +88,18 @@ const CommunityTips = ({ objectId }) => {
         });
 
     const tipCategories = [
-        { id: 'general', label: '💡 General Tips', icon: '💡' },
-        { id: 'safety', label: '⚠️ Safety Tips', icon: '⚠️' },
-        { id: 'maintenance', label: '🔧 Maintenance', icon: '🔧' },
-        { id: 'troubleshooting', label: '🚨 Troubleshooting', icon: '🚨' },
-        { id: 'creative', label: '🎨 Creative Uses', icon: '🎨' }
+        { id: 'general', label: 'General Tips', icon: '📝' },
+        { id: 'safety', label: 'Safety Tips', icon: '⚠️' },
+        { id: 'maintenance', label: 'Maintenance', icon: '🔧' },
+        { id: 'troubleshooting', label: 'Troubleshooting', icon: '🔍' },
+        { id: 'creative', label: 'Creative Uses', icon: '🎨' }
     ];
 
     return (
         <div className="community-tips">
             <div className="tips-header">
                 <div className="tips-title">
-                    <h3>💭 Community Tips & Tricks</h3>
+                    <h3>Community Tips & Tricks</h3>
                     <p>Learn from the experiences of other users</p>
                 </div>
                 
@@ -107,7 +107,7 @@ const CommunityTips = ({ objectId }) => {
                     className="add-tip-btn"
                     onClick={() => setShowAddForm(true)}
                 >
-                    ➕ Add Tip
+                    💡 Add Tip
                 </button>
             </div>
 
@@ -120,7 +120,7 @@ const CommunityTips = ({ objectId }) => {
                                 className="close-btn"
                                 onClick={() => setShowAddForm(false)}
                             >
-                                ✖️
+                                X
                             </button>
                         </div>
                         
@@ -167,7 +167,7 @@ const CommunityTips = ({ objectId }) => {
                                     Cancel
                                 </button>
                                 <button type="submit" className="primary">
-                                    Share Tip
+                                    🤝 Share Tip
                                 </button>
                             </div>
                         </form>
@@ -202,14 +202,14 @@ const CommunityTips = ({ objectId }) => {
             <div className="tips-list">
                 {filteredAndSortedTips.length === 0 ? (
                     <div className="no-tips">
-                        <div className="no-tips-icon">💭</div>
+                        <div className="no-tips-icon">?</div>
                         <h4>No tips yet!</h4>
                         <p>Be the first to share your knowledge about this object.</p>
                         <button 
                             className="add-first-tip-btn"
                             onClick={() => setShowAddForm(true)}
                         >
-                            Add First Tip
+                            💡 Add First Tip
                         </button>
                     </div>
                 ) : (
@@ -222,7 +222,7 @@ const CommunityTips = ({ objectId }) => {
                                         {tipCategories.find(cat => cat.id === tip.category)?.label.replace(/.*?\s/, '')}
                                     </span>
                                     {tip.verified && (
-                                        <span className="verified-badge">✅ Expert Verified</span>
+                                        <span className="verified-badge">Expert Verified</span>
                                     )}
                                 </div>
                                 <span className="tip-date">
@@ -237,7 +237,7 @@ const CommunityTips = ({ objectId }) => {
                             
                             <div className="tip-footer">
                                 <div className="tip-author">
-                                    👤 {tip.author}
+                                    Author: {tip.author}
                                 </div>
                                 
                                 <div className="tip-actions">
@@ -245,16 +245,16 @@ const CommunityTips = ({ objectId }) => {
                                         className="vote-btn helpful"
                                         onClick={() => handleVote(tip.id, 'helpful')}
                                     >
-                                        👍 {tip.helpful || 0}
+                                        👍 Helpful: {tip.helpful || 0}
                                     </button>
                                     <button 
                                         className="vote-btn not-helpful"
                                         onClick={() => handleVote(tip.id, 'not-helpful')}
                                     >
-                                        👎 {tip.notHelpful || 0}
+                                        👎 Not Helpful: {tip.notHelpful || 0}
                                     </button>
                                     <button className="report-btn">
-                                        🚩 Report
+                                        🚨 Report
                                     </button>
                                 </div>
                             </div>
@@ -282,18 +282,18 @@ const CommunityTips = ({ objectId }) => {
 
             <div className="expert-section">
                 <div className="expert-header">
-                    <h4>🎓 Want Expert Verification?</h4>
+                    <h4>Want Expert Verification?</h4>
                     <p>Submit your tips for review by verified experts in the field</p>
                 </div>
                 <div className="expert-benefits">
                     <ul>
-                        <li>✅ Get expert verification badge</li>
-                        <li>📈 Higher visibility in search results</li>
-                        <li>🏆 Build your reputation in the community</li>
-                        <li>💡 Help others with verified knowledge</li>
+                        <li>Get expert verification badge</li>
+                        <li>Higher visibility in search results</li>
+                        <li>Build your reputation in the community</li>
+                        <li>Help others with verified knowledge</li>
                     </ul>
                     <button className="expert-submit-btn">
-                        Submit for Expert Review
+                        🎯 Submit for Expert Review
                     </button>
                 </div>
             </div>

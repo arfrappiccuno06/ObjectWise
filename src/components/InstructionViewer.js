@@ -75,11 +75,11 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
         <div className="instruction-viewer">
             {object.requiredTools && object.requiredTools.length > 0 && (
                 <div className="required-tools">
-                    <h3>🛠️ Required Tools</h3>
+                    <h3>Required Tools</h3>
                     <div className="tools-grid">
                         {object.requiredTools.map((tool, index) => (
                             <div key={index} className="tool-item">
-                                <span className="tool-icon">🔧</span>
+                                <span className="tool-icon">TOOL</span>
                                 <span className="tool-name">{tool}</span>
                             </div>
                         ))}
@@ -89,11 +89,11 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
 
             {object.materials && object.materials.length > 0 && (
                 <div className="required-materials">
-                    <h3>📦 Materials Needed</h3>
+                    <h3>Materials Needed</h3>
                     <div className="materials-list">
                         {object.materials.map((material, index) => (
                             <div key={index} className="material-item">
-                                <span className="material-icon">📋</span>
+                                <span className="material-icon">MAT</span>
                                 <span className="material-name">{material}</span>
                             </div>
                         ))}
@@ -103,19 +103,19 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
 
             <div className="instructions-container">
                 <div className="instruction-header">
-                    <h3>📋 Step-by-Step Instructions</h3>
+                    <h3>Step-by-Step Instructions</h3>
                     <div className="instruction-controls">
                         <button
                             className="toggle-btn"
                             onClick={() => setShowAnnotations(!showAnnotations)}
                         >
-                            {showAnnotations ? '👁️ Hide Guides' : '👁️ Show Guides'}
+                            {showAnnotations ? '🚫 Hide Guides' : '📋 Show Guides'}
                         </button>
                         <button
                             className="toggle-btn"
                             onClick={onToggleSteps}
                         >
-                            {showAllSteps ? '📖 Step View' : '📜 List View'}
+                            {showAllSteps ? '📎 Step View' : '📋 List View'}
                         </button>
                     </div>
                 </div>
@@ -141,7 +141,7 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
 
                                     {step.tips && step.tips.length > 0 && (
                                         <div className="step-tips">
-                                            <strong>💡 Tips:</strong>
+                                            <strong>Tips:</strong>
                                             <ul>
                                                 {step.tips.map((tip, tipIndex) => (
                                                     <li key={tipIndex}>{tip}</li>
@@ -152,7 +152,7 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
 
                                     {step.warnings && step.warnings.length > 0 && (
                                         <div className="step-warnings">
-                                            <strong>⚠️ Caution:</strong>
+                                            <strong>Caution:</strong>
                                             <ul>
                                                 {step.warnings.map((warning, warnIndex) => (
                                                     <li key={warnIndex}>{warning}</li>
@@ -185,7 +185,7 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
                                         <h4>{instructions[currentStep].title}</h4>
                                         <div className="step-meta">
                                             <span className="step-time">
-                                                ⏱️ {instructions[currentStep].timeEstimate || '2-3 min'}
+                                                Time: {instructions[currentStep].timeEstimate || '2-3 min'}
                                             </span>
                                         </div>
                                     </div>
@@ -224,7 +224,7 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
 
                                         {instructions[currentStep].tips && (
                                             <div className="step-tips">
-                                                <h5>💡 Pro Tips:</h5>
+                                                <h5>Pro Tips:</h5>
                                                 <ul>
                                                     {instructions[currentStep].tips.map((tip, index) => (
                                                         <li key={index}>{tip}</li>
@@ -261,7 +261,7 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
                                         onClick={() => handleStepNavigation('next')}
                                         disabled={currentStep === totalSteps - 1}
                                     >
-                                        {currentStep === totalSteps - 1 ? 'Complete ✓' : 'Next →'}
+                                        {currentStep === totalSteps - 1 ? '✅ Complete' : 'Next →'}
                                     </button>
                                 </div>
                             </>
@@ -272,7 +272,7 @@ const InstructionViewer = ({ object, showAllSteps, onToggleSteps }) => {
 
             {object.alternatives && object.alternatives.length > 0 && (
                 <div className="alternative-methods">
-                    <h3>🔄 Alternative Methods</h3>
+                    <h3>Alternative Methods</h3>
                     {object.alternatives.map((alt, index) => (
                         <div key={index} className="alternative-card">
                             <h4>{alt.title}</h4>
