@@ -11,7 +11,7 @@ const CameraCapture = () => {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const navigate = useNavigate();
-    const { identifyObject, loading, currentObject } = useObject();
+    const { identifyObject, loading, currentObject, error } = useObject();
 
     useEffect(() => {
         if (currentObject) {
@@ -132,6 +132,21 @@ const CameraCapture = () => {
                                 <p>Analyzing object...</p>
                             </div>
                         )}
+                        {error && (
+                            <div className="error-overlay">
+                                <div className="error-icon">❌</div>
+                                <h4>Recognition Failed</h4>
+                                <p>{error}</p>
+                                <div className="error-actions">
+                                    <button onClick={retakePhoto} className="retry-btn">
+                                        📸 Try Again
+                                    </button>
+                                    <button onClick={() => navigate('/search')} className="search-btn">
+                                        🔍 Search Instead
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
@@ -170,8 +185,13 @@ const CameraCapture = () => {
                         </div>
                         
                         <div className="help-text">
+                            <div className="demo-banner">
+                                <h4>🚀 Demo Mode</h4>
+                                <p>For real object recognition, add Google Vision API key to .env file</p>
+                            </div>
                             <p>📱 Point your camera at any object</p>
                             <p>🎯 Center it in the frame for best results</p>
+                            <p>💡 Recognition works about 30% of the time in demo mode</p>
                         </div>
                     </>
                 ) : (

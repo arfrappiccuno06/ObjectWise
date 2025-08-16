@@ -113,7 +113,8 @@ body {
     border-radius: 12px;
 }
 
-.analysis-overlay {
+.analysis-overlay,
+.error-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -126,6 +127,52 @@ body {
     justify-content: center;
     color: white;
     border-radius: 12px;
+}
+
+.error-overlay {
+    background: rgba(220, 38, 38, 0.9);
+    text-align: center;
+    padding: 20px;
+}
+
+.error-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.error-overlay h4 {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.error-overlay p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.error-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.retry-btn,
+.search-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.retry-btn:hover,
+.search-btn:hover {
+    background: rgba(255,255,255,0.3);
 }
 
 /* Spinner */
@@ -242,6 +289,26 @@ body {
     padding: 16px;
     border-radius: 12px;
     margin-bottom: 20px;
+}
+
+.demo-banner {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.demo-banner h4 {
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.demo-banner p {
+    font-size: 12px;
+    opacity: 0.9;
+    margin: 0;
 }
 
 .quick-tips h3 {
